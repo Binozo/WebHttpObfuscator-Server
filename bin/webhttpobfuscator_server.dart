@@ -1,5 +1,11 @@
-import 'package:webhttpobfuscator_server/webhttpobfuscator_server.dart' as webhttpobfuscator_server;
+
+
+import 'package:webhttpobfuscator_server/client/client.dart';
+import 'package:webhttpobfuscator_server/server/server.dart';
 
 void main(List<String> arguments) {
-  print('Hello world: ${webhttpobfuscator_server.calculate()}!');
+  final server = Server(8080, (payload) => payload, (payload) => payload);
+  server.serve((request) async {
+    return await Client.performRequest(request);
+  });
 }
