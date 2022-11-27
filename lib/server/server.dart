@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_web_socket/shelf_web_socket.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:webhttpobfuscator_server/extensions/response_extension.dart';
 import 'package:webhttpobfuscator_server/log/log.dart';
 
 class Server {
@@ -15,7 +18,7 @@ class Server {
 
   void serve(Function(String) handleRequestCallback) async {
     var handler = webSocketHandler((WebSocketChannel webSocket) {
-      final stream = webSocket.stream.listen((message) {
+      final stream = webSocket.stream.listen((message) async {
         // Read encrypted json payload
         final String encryptedPayload = message;
         Log.debug("Received payload");
@@ -34,10 +37,13 @@ class Server {
 
         Log.debug("Processing request...");
         // Process the request and send the payload back to the client
-        final String result = handleRequestCallback(decrypted);
+        final Response result = await handleRequestCallback(decrypted);
+
+        // Convert Response Object to Json
+        final converted = jsonEncode(result.convertToJson());
 
         // Encrypt it again
-        final String encrypted = _payloadEncryptor(result);
+        final String encrypted = _payloadEncryptor(converted);
 
         // Send it back and close connection
         webSocket.sink.add(encrypted);
