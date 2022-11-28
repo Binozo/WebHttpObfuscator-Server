@@ -23,3 +23,8 @@ Now build your docker container
 ```bash
 docker build -t ghcr.io/binozo/webhttpobfuscator-server:latest .
 ```
+
+Run it
+```bash
+docker run -p 9268:9268 -d ghcr.io/binozo/webhttpobfuscator-server:latest
+```
