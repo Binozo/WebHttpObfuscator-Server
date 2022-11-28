@@ -13,7 +13,7 @@ String payloadDecryptor(String payload) {
 }
 
 void main(List<String> arguments) {
-  final server = Server(port, (payload) => payloadEncryptor, (payload) => payloadDecryptor);
+  final server = Server(port, (payload) => payloadEncryptor(payload), (payload) => payloadDecryptor(payload));
   server.serve((request) async {
     return await Client.performRequest(request);
   });
