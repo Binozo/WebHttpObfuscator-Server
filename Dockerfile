@@ -19,4 +19,6 @@ LABEL maintainer=binozoworks
 LABEL org.opencontainers.image.source="https://github.com/Binozo/WebHttpObfuscator-Server"
 LABEL org.opencontainers.image.description="Contains the endpoint for the WebHttpObfuscator Dart package"
 
+EXPOSE 9268
+
 CMD ["./server"]

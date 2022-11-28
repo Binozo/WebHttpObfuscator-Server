@@ -1,7 +1,7 @@
 import 'package:webhttpobfuscator_server/client/client.dart';
 import 'package:webhttpobfuscator_server/server/server.dart';
 
-const port = 8080;
+const port = 9268;
 String payloadEncryptor(String payload) {
   // TODO
   return payload;
