@@ -61,7 +61,7 @@ class Server {
       });
     });
 
-    _websocketServer = await shelf_io.serve(handler, "localhost", _port);
+    _websocketServer = await shelf_io.serve(handler, InternetAddress.anyIPv4, _port);
     Log.info("Serving Websocket on Port $_port");
     Log.info("Connect your client to ws://${_websocketServer!.address.host}:$_port");
   }
