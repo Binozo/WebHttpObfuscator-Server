@@ -21,5 +21,5 @@ Change the port, encryption and decryption function as you wish.
 
 Now build your docker container
 ```bash
-docker build ghcr.io/binozo/webhttpobfuscator-server:latest .
+docker build -t ghcr.io/binozo/webhttpobfuscator-server:latest .
 ```
