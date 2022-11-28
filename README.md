@@ -28,3 +28,15 @@ Run it
 ```bash
 docker run -p 9268:9268 -d ghcr.io/binozo/webhttpobfuscator-server:latest
 ```
+
+docker compose:
+```yaml
+version: "3.9"
+services:
+  WebHttpObfuscator-Server:
+    restart: always
+    image: ghcr.io/binozo/webhttpobfuscator-server:latest
+    ports:
+      - "9268:9268"
+    container_name: "WebHttpObfuscator-Server"
+```
