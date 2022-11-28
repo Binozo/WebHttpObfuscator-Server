@@ -37,7 +37,16 @@ class Server {
 
         Log.debug("Processing request...");
         // Process the request and send the payload back to the client
-        final Response result = await handleRequestCallback(decrypted);
+        final rawResult = await handleRequestCallback(decrypted);
+        if(rawResult is String) {
+          // An error occurred
+          // close connection
+          webSocket.sink.add(_payloadEncryptor(rawResult));
+          webSocket.sink.close();
+          Log.debug("An error occurred while proceeding request: $rawResult");
+          return;
+        }
+        final Response result = rawResult;
 
         // Convert Response Object to Json
         final converted = jsonEncode(result.convertToJson());
