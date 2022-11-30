@@ -14,6 +14,8 @@ class Client {
     final Map<String, dynamic> headers = Map<String, dynamic>.from(json["headers"]);
     final payload = json["payload"];
 
+    Log.debug("Payload type: ${payload.runtimeType}");
+
     final options = BaseOptions(
       headers: headers,
       validateStatus: (status) => true // status code should be redirected to client instead
