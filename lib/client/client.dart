@@ -31,6 +31,8 @@ class Client {
         return await client.post(url, data: payload);
       case "PUT":
         return await client.put(url, data: payload);
+      case "DELETE":
+        return await client.delete(url, data: payload);
     }
     Log.debug("Error: Request Method $method not found");
     throw MalformedRequestException("HTTP Method not found");
