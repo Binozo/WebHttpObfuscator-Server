@@ -16,6 +16,10 @@ class Log {
   }
 
   static void debug(String message) {
+    const bool prod = bool.fromEnvironment('dart.vm.product');
+    if(prod) {
+      return;
+    }
     final now = DateTime.now();
     final time = _dateFormatter.format(now);
     print("[$time][DEBUG]: $message");
