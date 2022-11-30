@@ -31,6 +31,7 @@ class Server {
           decrypted = await _payloadDecryptor(encryptedPayload);
         } catch (e) {
           Log.warning("Couldn't decrypt payload. May be malformed. Disconnecting...");
+          Log.debug("Stacktrace: ${e.toString()}");
           webSocket.sink.close();
           return;
         }
