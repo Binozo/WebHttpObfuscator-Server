@@ -28,7 +28,7 @@ class Server {
 
         try {
           Log.debug("Trying to decrypt payload...");
-          decrypted = _payloadDecryptor(encryptedPayload);
+          decrypted = await _payloadDecryptor(encryptedPayload);
         } catch (e) {
           Log.warning("Couldn't decrypt payload. May be malformed. Disconnecting...");
           webSocket.sink.close();
@@ -41,7 +41,7 @@ class Server {
         if(rawResult is String) {
           // An error occurred
           // close connection
-          webSocket.sink.add(_payloadEncryptor(rawResult));
+          webSocket.sink.add(await _payloadEncryptor(rawResult));
           webSocket.sink.close();
           Log.debug("An error occurred while proceeding request: $rawResult");
           return;
@@ -52,7 +52,7 @@ class Server {
         final converted = jsonEncode(result.convertToJson());
 
         // Encrypt it again
-        final String encrypted = _payloadEncryptor(converted);
+        final String encrypted = await _payloadEncryptor(converted);
 
         // Send it back and close connection
         webSocket.sink.add(encrypted);
