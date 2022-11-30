@@ -15,6 +15,7 @@ dart pub get
 ```
 
 Now you need to edit the `bin/webhttpobfuscator_server.dart` file.
+Note: You can find example configurations in the `examples` directory.
 Change the port, encryption and decryption function as you wish.
 
 ⚠️If you don't change it, it will send everything in plain text⚠️
