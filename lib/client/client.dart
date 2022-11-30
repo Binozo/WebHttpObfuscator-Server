@@ -12,7 +12,7 @@ class Client {
     final String method = json["method"].toUpperCase();
     final String url = json["url"];
     final Map<String, dynamic> headers = Map<String, dynamic>.from(json["headers"]);
-    final payload = json["payload"]; // TODO
+    final payload = json["payload"];
 
     final options = BaseOptions(
       headers: headers,
@@ -25,6 +25,8 @@ class Client {
     switch(method) {
       case "GET":
         return await client.get(url);
+      case "POST":
+        return await client.post(url, data: payload);
     }
     Log.debug("Error: Request Method $method not found");
     throw MalformedRequestException("HTTP Method not found");
