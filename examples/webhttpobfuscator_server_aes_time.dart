@@ -16,7 +16,6 @@ Future<String> payloadEncryptor(String payload) async {
 
 Future<String> payloadDecryptor(String payload) async {
   final now = DateTime.now();
-  print("Key: ${format.format(now)}");
   final key = Key.fromUtf8(format.format(now));
   final encrypter = Encrypter(AES(key));
   final decrypted = encrypter.decrypt64(payload, iv: IV.fromLength(16));
